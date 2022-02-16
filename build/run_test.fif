@@ -137,8 +137,6 @@ cr
     { ."INFO: Test [" ^green @' test-name type ^reset ."] status: [" ^green ."SUCCESS" ^reset ."]" cr drop } cond
 } : run-test
 
-
-
 @cnt @
 { dup 0> }
 { drop get-test run-test @cnt @ }
