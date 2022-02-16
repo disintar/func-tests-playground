@@ -1,0 +1,130 @@
+"Asm.fif" include
+// automatically generated from `/home/tvorogme/.config/toncli/func-libs/stdlib.fc` `/home/tvorogme/projects/func-tests-playground/tests/full_test.fc` 
+PROGRAM{
+  0 DECLMETHOD test_example_data
+  1 DECLMETHOD test_example
+  2 DECLMETHOD test_example2_data
+  3 DECLMETHOD test_example2
+  test_example_data PROC:<{
+    // 
+    -1 PUSHINT	//  function_selector=-1
+    123 PUSHINT	//  function_selector=-1 _3=123
+    NEWC	//  function_selector=-1 _3=123 _4
+    32 STU	//  function_selector=-1 _6
+    ENDC	//  function_selector=-1 message_to_send
+    0 PUSHINT	//  function_selector=-1 message_to_send _9=0
+    DUP	//  function_selector=-1 message_to_send _9=0 _10=0
+    NOW	//  function_selector=-1 message_to_send _9=0 _10=0 _11
+    30 ADDCONST	//  function_selector=-1 message_to_send _9=0 _10=0 _13
+    OVER	//  function_selector=-1 message_to_send _9=0 _10=0 _13 _14=0
+    NEWC	//  function_selector=-1 message_to_send _9=0 _10=0 _13 _14=0 _15
+    32 STU	//  function_selector=-1 message_to_send _9=0 _10=0 _13 _17
+    32 STU	//  function_selector=-1 message_to_send _9=0 _10=0 _19
+    32 STU	//  function_selector=-1 message_to_send _9=0 _21
+    8 STU	//  function_selector=-1 message_to_send _23
+    STREF	//  function_selector=-1 _24
+    ENDC	//  function_selector=-1 message
+    CTOS	//  function_selector=-1 _28
+    SINGLE	//  function_selector=-1 stack
+    0 PUSHINT	//  function_selector=-1 stack _31=0
+    s0 s0 PUSH2	//  function_selector=-1 stack _31=0 _32=0 _33=0
+    NEWC	//  function_selector=-1 stack _31=0 _32=0 _33=0 _34
+    32 STU	//  function_selector=-1 stack _31=0 _32=0 _36
+    32 STU	//  function_selector=-1 stack _31=0 _38
+    256 STU	//  function_selector=-1 stack _40
+    ENDC	//  function_selector=-1 stack data
+    124711402 PUSHINT	//  function_selector=-1 stack data _45=124711402
+    0 PUSHINT	//  function_selector=-1 stack data _45=124711402 _46=0
+    DUP	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0
+    NOW	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48
+    1 PUSHINT	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1
+    DUP	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1
+    239 PUSHINT	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239
+    1000000000 PUSHINT	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239 _53=1000000000
+    PUSHNULL	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239 _53=1000000000 _54
+    PAIR	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239 _55
+    PUSHNULL	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239 _55 _56
+    CONFIGROOT	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239 _55 _56 _57
+    10 TUPLE	//  function_selector=-1 stack data _58
+    SINGLE	//  function_selector=-1 stack data config
+    PUSHNULL	//  function_selector=-1 stack data config gas_limit
+    5 TUPLE	//  _62
+  }>
+  test_example PROC:<{
+    //  exit_code data stack actions gas
+    3 BLKDROP	//  exit_code data
+    SWAP	//  data exit_code
+    0 NEQINT	//  data _7
+    100 THROWIF
+    CTOS	//  ds
+    32 LDU	//  _12 ds
+    SWAP	//  ds _12
+    0 EQINT	//  ds _16
+    102 THROWIF
+    32 LDU	//  _28 _27
+    DROP	//  _19
+    0 NEQINT	//  _23
+    103 THROWIF
+  }>
+  test_example2_data PROC:<{
+    // 
+    -1 PUSHINT	//  function_selector=-1
+    123 PUSHINT	//  function_selector=-1 _3=123
+    NEWC	//  function_selector=-1 _3=123 _4
+    32 STU	//  function_selector=-1 _6
+    ENDC	//  function_selector=-1 message_to_send
+    0 PUSHINT	//  function_selector=-1 message_to_send _9=0
+    DUP	//  function_selector=-1 message_to_send _9=0 _10=0
+    NOW	//  function_selector=-1 message_to_send _9=0 _10=0 _11
+    30 ADDCONST	//  function_selector=-1 message_to_send _9=0 _10=0 _13
+    OVER	//  function_selector=-1 message_to_send _9=0 _10=0 _13 _14=0
+    NEWC	//  function_selector=-1 message_to_send _9=0 _10=0 _13 _14=0 _15
+    32 STU	//  function_selector=-1 message_to_send _9=0 _10=0 _13 _17
+    32 STU	//  function_selector=-1 message_to_send _9=0 _10=0 _19
+    32 STU	//  function_selector=-1 message_to_send _9=0 _21
+    8 STU	//  function_selector=-1 message_to_send _23
+    STREF	//  function_selector=-1 _24
+    ENDC	//  function_selector=-1 message
+    CTOS	//  function_selector=-1 _28
+    SINGLE	//  function_selector=-1 stack
+    0 PUSHINT	//  function_selector=-1 stack _31=0
+    s0 s0 PUSH2	//  function_selector=-1 stack _31=0 _32=0 _33=0
+    NEWC	//  function_selector=-1 stack _31=0 _32=0 _33=0 _34
+    32 STU	//  function_selector=-1 stack _31=0 _32=0 _36
+    32 STU	//  function_selector=-1 stack _31=0 _38
+    256 STU	//  function_selector=-1 stack _40
+    ENDC	//  function_selector=-1 stack data
+    124711402 PUSHINT	//  function_selector=-1 stack data _45=124711402
+    0 PUSHINT	//  function_selector=-1 stack data _45=124711402 _46=0
+    DUP	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0
+    NOW	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48
+    1 PUSHINT	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1
+    DUP	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1
+    239 PUSHINT	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239
+    1000000000 PUSHINT	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239 _53=1000000000
+    PUSHNULL	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239 _53=1000000000 _54
+    PAIR	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239 _55
+    PUSHNULL	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239 _55 _56
+    CONFIGROOT	//  function_selector=-1 stack data _45=124711402 _46=0 _47=0 _48 _49=1 _50=1 _51=239 _55 _56 _57
+    10 TUPLE	//  function_selector=-1 stack data _58
+    SINGLE	//  function_selector=-1 stack data config
+    PUSHNULL	//  function_selector=-1 stack data config gas_limit
+    5 TUPLE	//  _62
+  }>
+  test_example2 PROC:<{
+    //  exit_code data stack actions gas
+    3 BLKDROP	//  exit_code data
+    SWAP	//  data exit_code
+    1 NEQINT	//  data _7
+    100 THROWIF
+    CTOS	//  ds
+    32 LDU	//  _12 ds
+    SWAP	//  ds _12
+    0 EQINT	//  ds _16
+    102 THROWIF
+    32 LDU	//  _28 _27
+    DROP	//  _19
+    0 NEQINT	//  _23
+    103 THROWIF
+  }>
+}END>c

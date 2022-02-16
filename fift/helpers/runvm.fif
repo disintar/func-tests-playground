@@ -1,13 +1,8 @@
 "Color.fif" include
 "TonUtil.fif" include
 
-"build/boc/c4.boc" file>B // load file to bytes
- B>boc // deserializes bag of cells
- constant storage // save as storage
-
-"build/boc/c3.boc" file>B // load file to bytes
- B>boc // deserializes bag of cells
- constant code // save as code
+$1 include constant code
+"build/contract.fif" include constant data
 
 // You can do in bash: toncli lc saveconfig ./build/boc/config.boc
 // Ad comment null, and uncomment next line
@@ -35,21 +30,25 @@ global_config        // global_config
 60 =: timeout   // external message expires in 60 seconds
 "" =: comment // comment
 
-// cell to recv_external
-<b subwallet_id 32 u,
-   now timeout + 32 u,
-   seqno 32 u,
-   send-mode 8 u,
-   <b b{0} s, b> ref, // here we will store cell that will be sended in wallet v3
-b> constant recv_external
-
-recv_external hashu wallet_pk ed25519_sign_uint constant recv_external_sign // create signature of first bits
-
-<b  recv_external_sign B,
-    recv_external <s s,
-b> <s
+1 1 1
 -1 // function selector
 code <s // load func code as slice
-storage // add c4 cell lodaded from lite-client
+data // add c4 cell lodaded from lite-client
 c7 // add c7 cell
-runvmctx 2drop // Runvm, in stack now seqno
+
+// mode: -1 = pop from stack
+// +1 = same_c3 (set c3 to code)
+// +2 = push_0 (push an implicit 0 before running the code)
+// +4 = load c4 (persistent data) from stack and return its final value
+// +8 = load gas limit from stack and return consumed gas
+// +16 = load c7 (smart-contract context)
+// +32 = return c5 (actions)
+// +64 = log vm ops to stderr
+// +128 = pop hard gas limit (enabled by ACCEPT) from stack as well
+// +256 = enable stack trace
+// +512 = enable debug instructions
+0x75 runvmx // Runvm, in stack now seqno
+constant c5
+constant c4
+
+.s

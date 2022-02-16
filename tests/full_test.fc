@@ -1,0 +1,135 @@
+
+
+;; tuple creation helper
+forall X -> tuple unsafe_tuple(X x) asm "NOP";
+
+;; Toncli will automaticly download global_config
+;; And pass it to runvm (when running data functions)
+;; So you can get actual global config of network from get_config() function
+cell get_config() asm "CONFIGROOT";
+
+;; Each test function must specify method_id
+;; Test functions method_id need to started from 0
+
+;; Each test functions must to be in pairs
+;; First funtion expect nothing in arguments
+;; But need to return:
+;;        function selector - which function to test, e.g. 0 for recv_internal, -1 recv_external, 85143 for seqno, and so on
+;;        tuple - stack values needed to be passed to function in tuple
+;;        c4 cell - start data of smart contract
+;;        c7 tuple / null
+;;        gas limit integer / null
+
+;; warning do not use "main" name
+;; it will be fixed later
+[int, tuple, cell, tuple, int] test_example_data() method_id(0) {
+    int function_selector = -1; ;; funtion to run
+
+    ;; just check the message will be sended
+    cell message_to_send = begin_cell().store_uint(123, 32).end_cell();
+
+    cell message = begin_cell()     ;; external message body
+            .store_uint(0, 32)           ;; subwallet_id
+            .store_uint(now() + 30, 32)  ;; valid_until
+            .store_uint(0, 32)           ;; msg_seqno
+            .store_uint(0, 8)            ;; send_mode
+            .store_ref(message_to_send)  ;; cell to send
+            .end_cell();
+
+    tuple stack = unsafe_tuple([message.begin_parse()]); ;; stack of wallet
+
+    cell data = begin_cell()             ;; initial data of wallet
+        .store_uint(0, 32)               ;; seqno
+        .store_uint(0, 32)               ;; subwallet
+        .store_uint(0, 256)              ;; public key
+        .end_cell();
+
+    tuple config = unsafe_tuple([unsafe_tuple([
+        0x076ef1ea,           ;; magic
+        0,                    ;; actions
+        0,                    ;; msgs_sent
+        now(),                ;; unixtime
+        1,                    ;; block_lt
+        1,                    ;; trans_lt
+        239,                  ;; randseed
+        unsafe_tuple([1000000000, null()]),  ;; balance_remaining
+        null(),               ;; myself
+        get_config()          ;; global_config
+    ])]);
+
+    int gas_limit = null();
+
+    return [function_selector, stack, data, config, gas_limit];
+}
+
+
+;; After test data function
+;; We need to define test funtion
+;; It will accept:
+;;        exit code - exit code of runvm, here you can check errors / not
+;;        c4 cell - data of smart contract after runvm invokes
+;;        tuple - stack values of smart contract
+;;        c5 cell - here you can check all outcoming messages
+;;        gas - gas that was used
+;; By default test is passed
+;; You can use throw_if to fail test
+
+_ test_example(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(1) {
+    throw_if(100, exit_code != 0); ;; test need to be passed
+
+    var ds = data.begin_parse();
+
+    throw_if(102, ds~load_uint(32) == 0); ;; check seqno is changed
+    throw_if(103, ds~load_uint(32) != 0); ;; check subwallet id is same
+}
+
+
+[int, tuple, cell, tuple, int] test_example2_data() method_id(2) {
+    int function_selector = -1; ;; funtion to run
+
+    ;; just check the message will be sended
+    cell message_to_send = begin_cell().store_uint(123, 32).end_cell();
+
+    cell message = begin_cell()     ;; external message body
+            .store_uint(0, 32)           ;; subwallet_id
+            .store_uint(now() + 30, 32)  ;; valid_until
+            .store_uint(0, 32)           ;; msg_seqno
+            .store_uint(0, 8)            ;; send_mode
+            .store_ref(message_to_send)  ;; cell to send
+            .end_cell();
+
+    tuple stack = unsafe_tuple([message.begin_parse()]); ;; stack of wallet
+
+    cell data = begin_cell()             ;; initial data of wallet
+        .store_uint(0, 32)               ;; seqno
+        .store_uint(0, 32)               ;; subwallet
+        .store_uint(0, 256)              ;; public key
+        .end_cell();
+
+    tuple config = unsafe_tuple([unsafe_tuple([
+        0x076ef1ea,           ;; magic
+        0,                    ;; actions
+        0,                    ;; msgs_sent
+        now(),                ;; unixtime
+        1,                    ;; block_lt
+        1,                    ;; trans_lt
+        239,                  ;; randseed
+        unsafe_tuple([1000000000, null()]),  ;; balance_remaining
+        null(),               ;; myself
+        get_config()          ;; global_config
+    ])]);
+
+    int gas_limit = null();
+
+    return [function_selector, stack, data, config, gas_limit];
+}
+
+_ test_example2(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(3) {
+    throw_if(100, exit_code != 1); ;; test need to be passed
+
+    var ds = data.begin_parse();
+
+    throw_if(102, ds~load_uint(32) == 0); ;; check seqno is changed
+    throw_if(103, ds~load_uint(32) != 0); ;; check subwallet id is same
+}
+

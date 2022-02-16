@@ -4,6 +4,7 @@ Deployed by [toncli](https://github.com/disintar/toncli)
 
 ### Usage
 
-- `toncli run fift/data.fif`
-- `toncli run func/code.fc`
-- `toncli deploy -n testnet -wc 0`
+```
+toncli build
+toncli build tests/full_test.fc && toncli f run build/run_test.fif
+```

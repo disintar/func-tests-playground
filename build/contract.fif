@@ -13,52 +13,49 @@ PROGRAM{
   }>
   recv_external PROC:<{
     //  in_msg
-    9 PUSHPOW2	//  in_msg _3=512
-    LDSLICEX	//  signature in_msg
-    DUP	//  signature in_msg cs
-    32 LDU	//  signature in_msg _9 cs
-    32 LDU	//  signature in_msg _9 _12 cs
-    32 LDU	//  signature in_msg subwallet_id valid_until msg_seqno cs
+    //  cs
+    32 LDU	//  _5 cs
+    32 LDU	//  _5 _8 cs
+    32 LDU	//  subwallet_id valid_until msg_seqno cs
     s0 s2 XCHG
-    NOW	//  signature in_msg subwallet_id cs msg_seqno valid_until _19
-    LEQ	//  signature in_msg subwallet_id cs msg_seqno _20
+    NOW	//  subwallet_id cs msg_seqno valid_until _15
+    LEQ	//  subwallet_id cs msg_seqno _16
     35 THROWIF
-    c4 PUSH	//  signature in_msg subwallet_id cs msg_seqno _23
-    CTOS	//  signature in_msg subwallet_id cs msg_seqno ds
-    32 LDU	//  signature in_msg subwallet_id cs msg_seqno _28 ds
-    32 LDU	//  signature in_msg subwallet_id cs msg_seqno _28 _31 ds
-    256 LDU	//  signature in_msg subwallet_id cs msg_seqno stored_seqno stored_subwallet public_key ds
+    c4 PUSH	//  subwallet_id cs msg_seqno _19
+    CTOS	//  subwallet_id cs msg_seqno ds
+    32 LDU	//  subwallet_id cs msg_seqno _24 ds
+    32 LDU	//  subwallet_id cs msg_seqno _24 _27 ds
+    256 LDU	//  subwallet_id cs msg_seqno stored_seqno stored_subwallet public_key ds
     ENDS
-    s3 s2 XCPU	//  signature in_msg subwallet_id cs public_key stored_seqno stored_subwallet msg_seqno stored_seqno
-    EQUAL	//  signature in_msg subwallet_id cs public_key stored_seqno stored_subwallet _39
+    s3 s2 XCPU	//  subwallet_id cs public_key stored_seqno stored_subwallet msg_seqno stored_seqno
+    EQUAL	//  subwallet_id cs public_key stored_seqno stored_subwallet _35
     33 THROWIFNOT
-    s4 s4 XCPU	//  signature in_msg stored_subwallet cs public_key stored_seqno subwallet_id stored_subwallet
-    EQUAL	//  signature in_msg stored_subwallet cs public_key stored_seqno _42
+    s4 s4 XCPU	//  stored_subwallet cs public_key stored_seqno subwallet_id stored_subwallet
+    EQUAL	//  stored_subwallet cs public_key stored_seqno _38
     34 THROWIFNOT
-    s0 s4 XCHG	//  signature stored_seqno stored_subwallet cs public_key in_msg
-    HASHSU	//  signature stored_seqno stored_subwallet cs public_key _45
-    s0 s5 s5 XC2PU	//  public_key stored_seqno stored_subwallet cs _45 signature public_key
-    CHKSIGNU	//  public_key stored_seqno stored_subwallet cs _46
-    35 THROWIFNOT
-    ACCEPT	//  public_key stored_seqno stored_subwallet cs
+    ACCEPT
+    s0 s2 XCHG	//  stored_subwallet stored_seqno public_key cs
     WHILE:<{
-      DUP	//  public_key stored_seqno stored_subwallet cs cs
-      SREFS	//  public_key stored_seqno stored_subwallet cs _51
-    }>DO<{	//  public_key stored_seqno stored_subwallet cs
-      8 LDU	//  public_key stored_seqno stored_subwallet mode cs
-      LDREF	//  public_key stored_seqno stored_subwallet mode _56 cs
-      s0 s2 XCHG	//  public_key stored_seqno stored_subwallet cs _56 mode
-      SENDRAWMSG
-    }>	//  public_key stored_seqno stored_subwallet cs
-    DROP	//  public_key stored_seqno stored_subwallet
-    SWAP	//  public_key stored_subwallet stored_seqno
-    INC	//  public_key stored_subwallet _60
-    NEWC	//  public_key stored_subwallet _60 _61
-    32 STU	//  public_key stored_subwallet _63
-    32 STU	//  public_key _65
-    256 STU	//  _67
-    ENDC	//  _68
+      DUP	//  stored_subwallet stored_seqno public_key cs cs
+      SREFS	//  stored_subwallet stored_seqno public_key cs _43
+    }>DO<{	//  stored_subwallet stored_seqno public_key cs
+      8 LDU	//  stored_subwallet stored_seqno public_key _76 _75
+      NIP	//  stored_subwallet stored_seqno public_key cs
+      LDREF	//  stored_subwallet stored_seqno public_key _78 _77
+      NIP	//  stored_subwallet stored_seqno public_key cs
+    }>	//  stored_subwallet stored_seqno public_key cs
+    DROP	//  stored_subwallet stored_seqno public_key
+    SWAP	//  stored_subwallet public_key stored_seqno
+    INC	//  stored_subwallet public_key _51
+    NEWC	//  stored_subwallet public_key _51 _52
+    32 STU	//  stored_subwallet public_key _54
+    s1 s2 XCHG	//  public_key stored_subwallet _54
+    32 STU	//  public_key _56
+    256 STU	//  _58
+    ENDC	//  _59
     c4 POP
+    1 PUSHINT	//  _61=1
+    2 PUSHINT	//  _61=1 _62=2
   }>
   seqno PROC:<{
     // 
