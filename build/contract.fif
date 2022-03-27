@@ -1,5 +1,5 @@
 "Asm.fif" include
-// automatically generated from `/home/tvorogme/.config/toncli/func-libs/stdlib.fc` `/home/tvorogme/projects/func-tests-playground/func/code.fc` 
+// automatically generated from `/home/tvorogme/.config/toncli/func-libs/stdlib.func` `/home/tvorogme/projects/func-tests-playground/func/code.func` 
 PROGRAM{
   DECLPROC recv_internal
   DECLPROC recv_external

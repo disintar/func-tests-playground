@@ -1,4 +1,4 @@
-"Asm.fif" include
+"AsmTests.fif" include
 "Color.fif" include
 
 "contract.fif" include

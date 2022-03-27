@@ -1,5 +1,5 @@
 "Asm.fif" include
-// automatically generated from `/home/tvorogme/.config/toncli/func-libs/stdlib.fc` `/home/tvorogme/projects/func-tests-playground/tests/full_test.fc` 
+// automatically generated from `/home/tvorogme/.config/toncli/func-libs/stdlib.func` `/home/tvorogme/projects/func-tests-playground/tests/example.func` 
 PROGRAM{
   85860 DECLMETHOD get_c7
   0 DECLMETHOD test_example_data
@@ -95,7 +95,7 @@ PROGRAM{
     0 NEQINT	//  stack _7
     104 THROWIF
     FIRST	//  seqno
-    0 NEQINT	//  _13
+    1 NEQINT	//  _13
     105 THROWIF
   }>
 }END>c

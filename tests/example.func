@@ -103,6 +103,6 @@ _ test_example(int exit_code, cell data, tuple stack, cell actions, int gas) met
 _ test_get_seqno(int exit_code, cell data, tuple stack, cell actions, int gas) method_id(3) {
     throw_if(104, exit_code != 0); ;; test need to be passed
     int seqno = first(stack); ;; get answer from get method
-    throw_if(105, seqno != 0); ;; test if seqno is 0 as we set
+    throw_if(105, seqno != 1); ;; test if seqno is 0 as we set
 }
 
